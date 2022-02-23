@@ -1,0 +1,23 @@
+.navbar-item-custom, .navbar-item-custom a {
+    color: #FFFFFF;
+}
+
+.product-item h5{
+text-transform: uppercase;
+    font-size: 15px;
+    margin-bottom: 1px;
+}
+.product-item .product-subtile{
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+.product-item .product-price{
+    font-size: 15px;
+}
+.product-container{
+    margin-bottom: 125px;
+}
+.block-sm{
+    max-width: 600px;
+      margin: 0 auto;
+}

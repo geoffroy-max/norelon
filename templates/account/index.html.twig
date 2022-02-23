@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AccountController!{% endblock %}
+
+{% block body %}
+    <h1> gerer mon compte</h1>
+Bienvenue {{ (app.user.firstname) }} dans votre compte:
+   c'est dans cet espace que vous allez pouvoir gerer
+    les informations personnelles: <br>
+
+    - <a href="{{path('change_password')  }}">Modifier le mdp</a><br>
+    -  <a href="{{ path('account_adrress') }}">  Ajouter mes adresse</a> <br>
+    - Mes commandes<br>
+
+{% endblock %}

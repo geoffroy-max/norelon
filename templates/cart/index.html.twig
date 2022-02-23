@@ -1,0 +1,68 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} votre panier{% endblock %}
+
+{% block body %}
+<section class="bg-light p-3">
+    <h1 class=>votre panier</h1>
+       <p class="lead">Retrouvez l'ensemble des produits que vous avez ajouter dans le panier</p>
+</section>
+    <table class="table">
+        <thead>
+        <tr>
+        <th>Produit</th>
+            <th></th>
+        <th>Price</th>
+        <th>Quantité</th>
+        <th>Total</th>
+        <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+       {% for element in datapanier %}
+           <tr>
+               <td >
+                   <img src="{{ vich_uploader_asset( element.produit,'imageFile') }}" alt="{{ element.produit.name }}"
+                        height="75"><br>
+                   </td>
+                 <td>{{ element.produit.name  }}<br>
+                     {{ element.produit.subtitle }}
+                 </td>
+
+               <td>{{ (element.produit.price /100)|number_format(2,',', '') }}€</td>
+               <td>{{ element.quantite }}</td>
+               <td>{{ (element.quantite * element.produit.price /100)|number_format(2,',', '') }}€</td>
+               <td> <a href="{{ path('cart_add',{'id':element.produit.id}) }}" class="btn btn-success">
+                       <img src="{{ asset('assets/img/plus.png') }}" height="10px" alt="">
+                   </a>
+                <a href="{{ path('cart_remove',{'id':element.produit.id}) }}" class="btn btn-warning">
+                    <img src="{{ asset('assets/img/moins.png') }}" height="10px" alt="">
+
+                </a>
+               <a href="{{ path('cart_delete',{'id':element.produit.id}) }}"class="btn btn-danger" >
+                   <img src="{{ asset('assets/img/delete.png') }}" height="10px" alt="">
+                                                                                                         
+               </a>
+                <a href="{{ path('cart_delete_all') }}" class="btn btn-primary">
+                    <img src="{{ asset('assets/img/delete.png') }}" height="10px" alt="">
+                </a>
+               </td>
+           </tr>
+        {% else %}
+            <tr>
+                <td colspan="5" class="text-center">Votre panier est vide</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+        <tfoot>
+        <tr>
+            <td colspan="4">total</td>
+            <td class=>{{ (total /100)|number_format('2',',',' ')}}€</td>
+        </tr>
+        </tfoot>
+    </table>
+    <div class="text-right mb-5">
+        <b>nombre de produit:</b>{{ datapanier|length }}<br>
+        <a href="{{ path('order') }}" class="btn btn-success btn-block mt-3" >Valider mon panier</a>
+    </div>
+{% endblock %}
