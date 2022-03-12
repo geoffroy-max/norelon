@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AccountController!{% endblock %}
+
+{% block body %}
+
+    <h1>Gerer mes commandes</h1>
+    c'est dans cet espace que vous allez pouvoir gerer toutes vos commandes:<br/>
+    <a href="{{path('account')  }}">Retour sur mon compte</a>
+    <hr>
+
+    {% if app.user.orderrs|length == 0 %}
+        <P> Vous n'avez pas encore passer une commande sur la boutique française </P>
+    {% else %}
+        <div class="row">
+
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">First</th>
+                    <th scope="col">Last</th>
+                    <th scope="col">Handle</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                {#{% for order in app.user.orderrs %}:avec cet boucle on va recuperer ttes les commandes par
+                    contre moi je vx recuperer que les commandes qui sont payées je serai obligé d'utlise une autre methode
+                    en passaant par Orderepository
+                #}
+                {% for order in app.user.orderrs %}
+
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>Mark</td>
+                        <td>Otto</td>
+                        <td>@mdo</td>
+                    </tr>
+
+
+                {% endfor %}
+                </tbody>
+            </table>
+
+        </div>
+    {% endif %}
+
+{% endblock %}

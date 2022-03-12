@@ -3,24 +3,24 @@
 namespace App\Controller;
 
 use App\Entity\Order;
-use App\Form\OrderType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-
-class AccountController extends AbstractController
+class AccountOrderController extends AbstractController
 {
     /**
      *
-     * @Route("/compte", name="account")
+     * @Route("/compte/order", name="account_order")
      */
     public function index(EntityManagerInterface $em): Response
     {
 
+        $orders= $em->getRepository(Order::class)->findSuccessOrder($this->getUser());
 
-        return $this->render('account/index.html.twig'
+        dd($orders);
+        return $this->render('account/order.html.twig', [
 
-        );
+        ]);
     }
 }

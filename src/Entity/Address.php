@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\AddressRepository;
 use Doctrine\ORM\Mapping as ORM;
+use mysql_xdevapi\BaseResult;
 
 /**
  * @ORM\Entity(repositoryClass=AddressRepository::class)
@@ -143,6 +144,11 @@ class Address
         $this->address = $address;
 
         return $this;
+    }
+
+    public function __toString(){
+        $nom= $this->getName().'[br]'. $this->getAddress().'[br]'. $this->getCity().'-'. $this->getCountry();
+        return $nom;
     }
 
     public function getPostal(): ?string

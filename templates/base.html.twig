@@ -10,7 +10,9 @@
 
     <!-- Bootstrap core CSS -->
     <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet">
+      {% block javascript %}
 
+    {% endblock %}
     <style>
         .bd-placeholder-img {
             font-size: 1.125rem;
@@ -53,11 +55,15 @@
             <div class="navbar-item-custom">
             {% if app.user %}
                 <a href="{{ path('account') }}">mon compte</a> | <a href="{{ path('app_logout') }}">deconnexion</a>
+                
             {% else %}
 
                 <a href="{{ path('app_login') }}">connexion</a> | <a href="{{ path('inscription') }}">inscription</a>
                 {% endif %}
             </div>
+            <a href="{{ path('cart_index') }}"><img src="{{ asset('assets/img/cart-png.png') }}" class="cart-icon" alt=""></a>
+
+
         </div>
     </nav>
 </header>

@@ -23,7 +23,8 @@ class AdressType extends AbstractType
             ->add('lastname',TextType::class,['label'=>"votre nom",
         'attr'=>['placeholder'=>"entrez votre nom"]])
             ->add('company',TextType::class,['label'=>"le nom de votre societé",
-        'attr'=>['placeholder'=>"nommez la soscieté"]])
+            'required'=>false,
+        'attr'=>['placeholder'=>"optionnel"]])
             ->add('address',TextType::class,['label'=>"quel nom souhaitez donner à votre adresse",
                 'attr'=>['placeholder'=>"nommez votre adresse"]])
             ->add('postal',TextType::class,['label'=>"votre code postale",

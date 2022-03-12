@@ -49,6 +49,13 @@ class Carrier
         return $this;
     }
 
+
+    public function __toString(){
+        $nom= $this->name.'[br]'. $this->getDescription().'[br]'.number_format(($this->getPrice()/100),2 , ',', '').'€'  ;
+        return $nom;
+    }
+
+
     public function getDescription(): ?string
     {
         return $this->description;

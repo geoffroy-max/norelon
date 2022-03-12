@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Classe\Cart;
 use App\Entity\Product;
 use App\Repository\ProductRepository;
 use SessionIdInterface;
@@ -16,86 +17,54 @@ class CartController extends AbstractController
      * cette fonction premet de gerer le panier
      * @Route("/cart", name="cart_index")
      */
-    public function index(SessionInterface $session,ProductRepository $repository): Response
+    public function index(Cart $cart): Response
     {
-        $panier= $session->get('panier', []);
-        $datapanier= [];
-        $total= 0;
-         foreach ($panier as $id => $quantite){
-             $product= $repository->find($id);
-             $datapanier[]= [
-                 'produit'=>$product,
-                 'quantite'=>$quantite
-             ];
-             $total += $product->getPrice()*$quantite;
-         }
-        return $this->render('cart/index.html.twig',compact("datapanier","total")
-        );
+
+        return $this->render('cart/index.html.twig',[
+            'cart'=> $cart->getfull(),
+
+        ]);
+
     }
 
     /**
      * cette fonction premet d'ajouter le produit dans le panier
      * @Route("/cart/add/{id}", name="cart_add")
      */
-    public function add(Product $product, SessionInterface $session): Response
+    public function add($id, Cart $cart)
     {
-        $panier = $session->get('panier', []);
-        // en utilisant le product ça ns permet de ne pas mettre le num du produit qui n'existe pas
-        $id = $product->getId();
-        // $panier[$id]= 1 : on ajoute un produit dans notre panier
-        if (!empty($panier[$id])) {
-            $panier[$id]++;
-        } else {
-            $panier[$id] = 1;
-        }
-        //on sauvegarde le panier dans la session
-        $session->set('panier', $panier);
-
-       return $this->redirectToRoute('cart_index');
+        $cart->add($id);
+        return $this->redirectToRoute('cart_index');
 
 
     }
 
     /**
-     * cette fonction permet de supprimer un produit parmi plusieurs produits dans le panier
-     * @Route("/remove/{id}", name="cart_remove")
+     * cette fonction permet de diminuer un produit parmi plusieurs produits dans le panier
+     * @Route("/decrease/{id}", name="cart_remove") decrease
      */
-    public function remove($id ,SessionInterface $session){
-        $panier= $session->get('panier',[]);
-        if(!empty($panier[$id])) {
-           if ($panier[$id]>1){
-               $panier[$id]--;
-        }else {
-               unset($panier[$id]);
-           }
-        }
-        // on sauvegarde dans la session
-        $session->set('panier', $panier);
+    public function decrease($id ,Cart $cart){
+        $cart->decrease($id);
+
         return $this->redirectToRoute('cart_index');
     }
     /**
      * cette fonction permet de supprimer un  panier
      * @Route("/delete/{id}", name="cart_delete")
      */
-    public function delete(Product $product, SessionInterface $session)
-{
-        $panier= $session->get('panier',[]);
-        $id= $product->getId();
-        if (!empty($panier[$id])){
-            unset($panier[$id]);
-        }
-        // on sauvegarde dans la session:ajoute le produit dans le panier
-        $session->set('panier', $panier);
+    public function delete(Product $product, Cart $cart)
+{                 $cart->delete($product);
+
         return $this->redirectToRoute('cart_index');
     }
 
     /**
-     * cette fonction permet de supprimer toute la session de  panier
+     * cette fonction permet de supprimer (retirer) toute la session de  panier
      * @Route("/delete", name="cart_delete_all")
      */
-    public function deleteAll( SessionInterface $session)
+    public function remove( Cart $cart)
     {
-       $session->remove('panier');
+          $cart->remove();
 
         return $this->redirectToRoute('cart_index');
     }

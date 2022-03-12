@@ -21,3 +21,7 @@ text-transform: uppercase;
     max-width: 600px;
       margin: 0 auto;
 }
+.cart-icon{
+    height: 20px;
+    margin-left: 20px;
+}

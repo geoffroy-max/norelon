@@ -9,6 +9,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 class AccountAdrressController extends AbstractController
@@ -27,7 +28,7 @@ class AccountAdrressController extends AbstractController
      * @Route("/compte/add-une-adresse" , name="add_adress")
      * cette fonction permet d'ajouter une adresse
      */
-    public function add(Request $request,EntityManagerInterface $manager){
+    public function add(Request $request,EntityManagerInterface $manager, SessionInterface $session){
         $adress= new Address();
 
         $form= $this->createForm(AdressType::class, $adress);
@@ -38,6 +39,12 @@ class AccountAdrressController extends AbstractController
           $adress->setUser($user);
           $manager->persist($adress);
           $manager->flush();
+          // si j'ai le produit dans le panier je dois me redireger dans order pr psser la commande
+            //  sinon vers accoun adrs
+
+            if($session->get('panier')){
+                return $this->redirectToRoute('order');
+            }
           return $this->redirectToRoute('account_adrress');
 
 

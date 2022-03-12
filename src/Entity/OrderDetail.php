@@ -6,10 +6,11 @@ use App\Repository\OrderDetailRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
+ *
  * @ORM\Entity(repositoryClass=OrderDetailRepository::class)
  */
 class OrderDetail
-{
+{ //order detail contient ttes les informations concernant le produit
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -99,6 +100,9 @@ class OrderDetail
     public function getMyOrder(): ?Order
     {
         return $this->myOrder;
+    }
+    public function __toString(){
+        return $this->getProduct().'×'. $this->getQuantity();
     }
 
     public function setMyOrder(?Order $myOrder): self

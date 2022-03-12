@@ -51,6 +51,27 @@ class Order
      */
     private $carrierPrice;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isPaid;
+
+    /**
+     * cette propieté permet de recuperer les enrgtrmnts dns la bd en fonction du reference
+     * @ORM\Column(type="string", length=255)
+     */
+    private $reference;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $refernce;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+   // private $stripeSessionId;
+
     public function __construct()
     {
         $this->orderDetails = new ArrayCollection();
@@ -73,6 +94,20 @@ class Order
         return $this;
     }
 
+    /**
+     * cette fonction permet de calculer le total des cmd dans easyAdmin
+     */
+     public function getTotal()
+     {
+        $total= null;
+        foreach($this->getOrderDetails()->getValues() as $product){
+     $total= $total +($product->getPrice() * $product->getQuantity());
+     return $total;
+        }
+
+
+
+     }
     public function getCarrierName(): ?string
     {
         return $this->carrierName;
@@ -147,6 +182,57 @@ class Order
     public function setCarrierPrice(float $carrierPrice): self
     {
         $this->carrierPrice = $carrierPrice;
+
+        return $this;
+    }
+
+    public function getIsPaid(): ?bool
+    {
+        return $this->isPaid;
+    }
+
+    public function setIsPaid(bool $isPaid): self
+    {
+        $this->isPaid = $isPaid;
+
+        return $this;
+    }
+
+
+
+
+    public function getReference(): ?string
+    {
+        return $this->reference;
+    }
+
+    public function setReference(string $reference): self
+    {
+        $this->reference = $reference;
+
+        return $this;
+    }
+
+    public function getStripeSessionId(): ?string
+    {
+        return $this->stripeSessionId;
+    }
+
+    public function setStripeSessionId(?string $stripeSessionId): self
+    {
+        $this->stripeSessionId = $stripeSessionId;
+
+        return $this;
+    }
+
+    public function getRefernce(): ?string
+    {
+        return $this->refernce;
+    }
+
+    public function setRefernce(?string $refernce): self
+    {
+        $this->refernce = $refernce;
 
         return $this;
     }

@@ -19,7 +19,8 @@
         </tr>
         </thead>
         <tbody>
-       {% for element in datapanier %}
+        {% set total= null %}
+       {% for element in cart %}
            <tr>
                <td >
                    <img src="{{ vich_uploader_asset( element.produit,'imageFile') }}" alt="{{ element.produit.name }}"
@@ -48,6 +49,7 @@
                 </a>
                </td>
            </tr>
+           {% set total = total +(element.quantite * element.produit.price )  %}
         {% else %}
             <tr>
                 <td colspan="5" class="text-center">Votre panier est vide</td>
@@ -62,7 +64,7 @@
         </tfoot>
     </table>
     <div class="text-right mb-5">
-        <b>nombre de produit:</b>{{ datapanier|length }}<br>
+        <b>nombre de produit:</b>{{ cart|length }}<br>
         <a href="{{ path('order') }}" class="btn btn-success btn-block mt-3" >Valider mon panier</a>
     </div>
 {% endblock %}
