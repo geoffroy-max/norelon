@@ -1,0 +1,5 @@
+{% for com in commentaires %}
+    <p>{{ com.content }}</p>
+    <span>par {{ com.author }} le {{ com.createdAt|date('d/m/Y') }}</span>
+
+{% endfor %}

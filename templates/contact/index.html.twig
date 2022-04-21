@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Log in!{% endblock %}
+
+{% block body %}
+    <h2>Formulaire de contact</h2>
+    <p>contacter les administrateurs</p>
+    {% for message in app.flashes('notice') %}
+        <div class="alert alert-info">{{ message }}</div>
+    {% endfor %}
+    <div class="row">
+    <div class="col-md-8">
+        {{ form(form) }}
+    </div>
+    <div class="col-md-4">
+   <strong>La boutique Française</strong>
+        <hr>
+        074567857 <br/>
+        norelonboutiqu@yahoo.com <br/>
+        46 allé de la vivaraize (41200)
+    </div>
+    </div>
+{% endblock %}

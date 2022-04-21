@@ -6,6 +6,7 @@
 text-transform: uppercase;
     font-size: 15px;
     margin-bottom: 1px;
+
 }
 .product-item .product-subtile{
     font-size: 16px;
@@ -24,4 +25,26 @@ text-transform: uppercase;
 .cart-icon{
     height: 20px;
     margin-left: 20px;
+}
+.img{
+    height: 300px;
+    width: 300px;
+}
+.account-item{
+    background-color: #b2bec3;
+    padding: 70px;
+}
+.account-item a{
+    text-transform: uppercase;
+    font-size: 14px;
+    font-weight: bold;
+    color:#636e72 ;
+}
+.account-item a:hover{
+    color: #a29bfe;
+    text-decoration: none;
+}
+.account-item img{
+    height: 30px;
+    width: 30px;
 }

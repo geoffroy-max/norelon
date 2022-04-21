@@ -7,29 +7,19 @@
 
 <h2>Merci pour votre commande!</h2>
 
+            {#{% for order in app.user.orders %}  #}
 
-        {% for order in app.user.orders %}
-            <p>
-            Bonjour  <strong>{{ order.user.firstname}}  {{ order.user.lastname}}</strong>.<br/>
-            Une confirmation vient d'etre envoyer à l'adresse <strong>{{ order.user.email }}</strong>
-            <hr>
-            votre commande sera livré par {{ order.carrierName}} à l'adresse suivante:<br/>
-            {{ order.delivery|raw }}
-            <hr>
-            Pour suivre votre commande , rendez vous dans votre <a href="{{path('account') }}">compte</a>
-            </p>
-        {% endfor %}
-    {#
+            {# votre commande sera livré par {{ order.carrierName}} à l'adresse suivante:<br/>
+            {{ order.delivery|raw }} #}
+
+
+
 
     <p>
      Bonjour
     <strong>{{ app.user.firstname}}  {{ app.user.lastname}}</strong>.<br/>
          Une confirmation vient d'etre envoyer à l'adresse <strong>{{ app.user.email }}</strong>
     <hr>
-    Pour suivre votre commande , rendez vous dans votre <a href="{{path('account') }}">compte</a>
+    Pour suivre votre commande , rendez vous dans votre <a href="{{path('account_order') }}">compte</a>
     </p>
-
-    #}
-
-
 {% endblock %}

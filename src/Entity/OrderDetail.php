@@ -44,6 +44,12 @@ class OrderDetail
      */
     private $myOrder;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Commande::class, inversedBy="orderdetaills")
+     * @ORM\JoinColumn(nullable=false)
+     */
+
+
     public function getId(): ?int
     {
         return $this->id;
@@ -111,4 +117,8 @@ class OrderDetail
 
         return $this;
     }
+
+
+
+
 }

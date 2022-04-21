@@ -6,10 +6,10 @@
 
     <h1>Gerer mes commandes</h1>
     c'est dans cet espace que vous allez pouvoir gerer toutes vos commandes:<br/>
-    <a href="{{path('account')  }}">Retour sur mon compte</a>
+    <a href="{{path('account_order')  }}">Retour sur mon compte</a>
     <hr>
 
-    {% if app.user.orderrs|length == 0 %}
+    {% if orders3|length == 0 %}
         <P> Vous n'avez pas encore passer une commande sur la boutique française </P>
     {% else %}
         <div class="row">
@@ -17,10 +17,12 @@
             <table class="table">
                 <thead>
                 <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">First</th>
-                    <th scope="col">Last</th>
-                    <th scope="col">Handle</th>
+                    <th scope="col">Reference</th>
+                    <th>Statut</th>
+                    <th scope="col">Passé le</th>
+                    <th scope="col">Produit(s)</th>
+                    <th scope="col">total</th>
+                    <th scope="col"></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -29,13 +31,24 @@
                     contre moi je vx recuperer que les commandes qui sont payées je serai obligé d'utlise une autre methode
                     en passaant par Orderepository
                 #}
-                {% for order in app.user.orderrs %}
+                {% for order in orders3 %}
 
                     <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
+
+                        <td> <span class="btn btn-secondary"> {{ order.reference }} </span> </td>
+                        <td> {% if order.state == 1 %}
+                               paiement accepté
+                             {% elseif order.state == 2 %}
+                                 preparation en cours
+                             {% elseif order.state == 3 %}
+                                 livraison en cours
+                                 {% endif %}
+
+                        </td>
+                        <td>{{ order.createdAt|date('d/m/y') }}</td>
+                        <td>{{ order.orderDetail3s|length }}</td>
+                        <td>{{ ((order.carrierPrice + order.getTotal) /100)|number_format(2,',',' ') }}</td>
+                        <td class="text-right"><a href="{{ path('show_order',{'reference':order.reference}) }}">mes commandes</a> </td>
                     </tr>
 
 

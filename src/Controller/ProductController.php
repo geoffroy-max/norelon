@@ -3,8 +3,15 @@
 namespace App\Controller;
 
 use App\Classe\Search;
+use App\Repository\CommentaireRepository;
+use App\Service\CommentaireService;
+use App\Entity\Commentaire;
+use App\Entity\Order3;
+use App\Entity\Product;
+use App\Form\CommentaireType;
 use App\Form\SearchType;
 use App\Repository\ProductRepository;
+
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -39,10 +46,34 @@ class ProductController extends AbstractController
      * cette fonction permet d'afficher un produit
      * @Route ("/produit/{slug}", name="product")
      */
-    public function show($slug, EntityManagerInterface $manager, ProductRepository $repository){
-        $product= $repository->findOneBySlug($slug);
+    public function show($slug, EntityManagerInterface $manager, ProductRepository $repository,
+                         Request $request, CommentaireService $service,CommentaireRepository $commentaire1,Product $product){
+
+        $commentaire= new Commentaire();
+        $commentaires= $commentaire1->findCommentaire($product);
+
+
+        $product= $manager->getRepository(Product::class)->findOneBySlug($slug);
+        $products= $manager->getRepository(Product::class)->findByIsBest(1);
+
+        $form= $this->createForm(CommentaireType::class,$commentaire);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted()&& $form->isValid()){
+            $commentaires= $form->getData();
+            //dd($commentaire);
+            $service->persistComentaire($commentaire,$product);
+            return $this->redirectToRoute('product',['slug'=>$product->getslug()]);
+        }
+
+
         return $this->render('product/show.html.twig',[
-            'product'=>$product
+            'product'=>$product,
+            'products'=>$products,
+            'form'=>$form->createView(),
+            'commentaires'=>$commentaires
+
+
         ]);
     }
 }

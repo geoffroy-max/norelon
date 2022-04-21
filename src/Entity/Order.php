@@ -65,7 +65,12 @@ class Order
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $refernce;
+   // private $refernce;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+   // private $rfernce;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -233,6 +238,18 @@ class Order
     public function setRefernce(?string $refernce): self
     {
         $this->refernce = $refernce;
+
+        return $this;
+    }
+
+    public function getRfernce(): ?string
+    {
+        return $this->rfernce;
+    }
+
+    public function setRfernce(string $rfernce): self
+    {
+        $this->rfernce = $rfernce;
 
         return $this;
     }

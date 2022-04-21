@@ -13,17 +13,10 @@
             <div class="row product-container">
                 {% for product in products %}
                     <div class="col-md-4">
-                        <div class="product-item text-center">
-                            <a href="{{ path('product',{'slug': product.slug}) }}">
-                                <img src="{{ vich_uploader_asset(product ,'imageFile') }}" alt="{{ product.name }}" class="img-fluid">
-                            </a>
-                            <h5>{{product.name}}</h5>
-                            <span class="product-subtile">{{ product.subtitle }}</span>
-                            <div class="text-primary"> {{ (product.price/100)|number_format(2,',','') }}€</div>
-
+             {% include 'product/single.html.twig' %}
                         </div>
-                    </div>
                 {% endfor %}
+            </div>
             </div>
         </div>
     </div>

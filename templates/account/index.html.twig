@@ -8,8 +8,33 @@ Bienvenue {{ (app.user.firstname) }} dans votre compte:
    c'est dans cet espace que vous allez pouvoir gerer
     les informations personnelles: <br>
 
-    - <a href="{{path('change_password')  }}">Modifier le mdp</a><br>
-    -  <a href="{{ path('account_adrress') }}">  Ajouter mes adresse</a> <br>
-    -  <a href="{{ path('account_order') }}">  Mes commandes<br></a>
+    {% if is_granted('ROLE_ADMIN') %}
+        <small><a href="/admin">vous etes un admin: acceder au backoffice</a><br/> </small>
+    {% endif %}
+    <hr>
+    <div class="row">
+        <div class="col md-4">
+            <div class="account-item">
+                <img src="{{ asset('assets/img/padlock.png') }}" alt="modifier le mdp"> <br/>
+                 <a href="{{path('change_password')  }}">Modifier le mdp</a><br>
+            </div>
+
+        </div>
+        <div class="col md-4">
+            <div class="account-item">
+                <img src="{{ asset('assets/img/location.png') }}" alt="ajouter mes adresses"> <br/>
+                 <a href="{{ path('account_adrress') }}">  Ajouter mes adresse</a> <br>
+            </div>
+        </div>
+        <div class="col md-4">
+            <div class="account-item">
+                <img src="{{ asset('assets/img/purchase.png') }}" alt="mes commandes"> <br/>
+                  <a href="{{ path('account_order') }}">  Mes commandes<br></a>
+            </div>
+        </div>
+    </div>
+
+
+
 
 {% endblock %}

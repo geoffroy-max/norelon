@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ProductRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
@@ -74,6 +76,21 @@ class Product
      * @ORM\Column(type="datetime")
      */
     private $createdAt;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isBest;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Commentaire::class, mappedBy="product")
+     */
+    private $commentaires;
+
+    public function __construct()
+    {
+        $this->commentaires = new ArrayCollection();
+    }
 
     /**
      * @return File|null
@@ -207,6 +224,52 @@ class Product
     public function setCreatedAt(\DateTimeInterface $createdAt): self
     {
         $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getIsBest(): ?bool
+    {
+        return $this->isBest;
+    }
+
+    public function setIsBest(bool $isBest): self
+    {
+        $this->isBest = $isBest;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Commentaire>
+     */
+    public function getCommentaires(): Collection
+    {
+        return $this->commentaires;
+    }
+
+    public function addCommentaire(Commentaire $commentaire): self
+    {
+        if (!$this->commentaires->contains($commentaire)) {
+            $this->commentaires[] = $commentaire;
+            $commentaire->setProduct($this);
+        }
+
+        return $this;
+    }
+ public function __toString()
+ {
+    return $this->name;
+ }
+
+    public function removeCommentaire(Commentaire $commentaire): self
+    {
+        if ($this->commentaires->removeElement($commentaire)) {
+            // set the owning side to null (unless already changed)
+            if ($commentaire->getProduct() === $this) {
+                $commentaire->setProduct(null);
+            }
+        }
 
         return $this;
     }

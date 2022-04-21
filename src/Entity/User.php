@@ -65,11 +65,41 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $orderrs;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Commande::class, mappedBy="user")
+     */
+   // private $commandes;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Order1::class, mappedBy="user")
+     */
+    private $order1s;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Order1::class, mappedBy="user")
+     */
+    private $order1ss;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Order3::class, mappedBy="user")
+     */
+    private $order3s;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Order1::class, mappedBy="user")
+     */
+    private $orderr1;
+
     public function __construct()
     {
         $this->addresses = new ArrayCollection();
         $this->orders = new ArrayCollection();
         $this->orderrs = new ArrayCollection();
+        $this->commandes = new ArrayCollection();
+        $this->order1s = new ArrayCollection();
+        $this->order1ss = new ArrayCollection();
+        $this->order3s = new ArrayCollection();
+        $this->orderr1 = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -274,6 +304,156 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($orderr->getUser() === $this) {
                 $orderr->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Commande[]
+     */
+    public function getCommandes(): Collection
+    {
+        return $this->commandes;
+    }
+
+    public function addCommande(Commande $commande): self
+    {
+        if (!$this->commandes->contains($commande)) {
+            $this->commandes[] = $commande;
+            $commande->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCommande(Commande $commande): self
+    {
+        if ($this->commandes->removeElement($commande)) {
+            // set the owning side to null (unless already changed)
+            if ($commande->getUser() === $this) {
+                $commande->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Order1[]
+     */
+    public function getOrder1s(): Collection
+    {
+        return $this->order1s;
+    }
+
+    public function addOrder1(Order1 $order1): self
+    {
+        if (!$this->order1s->contains($order1)) {
+            $this->order1s[] = $order1;
+            $order1->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOrder1(Order1 $order1): self
+    {
+        if ($this->order1s->removeElement($order1)) {
+            // set the owning side to null (unless already changed)
+            if ($order1->getUser() === $this) {
+                $order1->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Order1[]
+     */
+    public function getOrder1ss(): Collection
+    {
+        return $this->order1ss;
+    }
+
+    public function addOrder1ss(Order1 $order1ss): self
+    {
+        if (!$this->order1ss->contains($order1ss)) {
+            $this->order1ss[] = $order1ss;
+            $order1ss->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOrder1ss(Order1 $order1ss): self
+    {
+        if ($this->order1ss->removeElement($order1ss)) {
+            // set the owning side to null (unless already changed)
+            if ($order1ss->getUser() === $this) {
+                $order1ss->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Order3[]
+     */
+    public function getOrder3s(): Collection
+    {
+        return $this->order3s;
+    }
+
+    public function addOrder3(Order3 $order3): self
+    {
+        if (!$this->order3s->contains($order3)) {
+            $this->order3s[] = $order3;
+            $order3->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOrder3(Order3 $order3): self
+    {
+        if ($this->order3s->removeElement($order3)) {
+            // set the owning side to null (unless already changed)
+            if ($order3->getUser() === $this) {
+                $order3->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Order1>
+     */
+    public function getOrderr1(): Collection
+    {
+        return $this->orderr1;
+    }
+
+    public function addOrderr1(Order1 $orderr1): self
+    {
+        if (!$this->orderr1->contains($orderr1)) {
+            $this->orderr1[] = $orderr1;
+            $orderr1->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOrderr1(Order1 $orderr1): self
+    {
+        if ($this->orderr1->removeElement($orderr1)) {
+            // set the owning side to null (unless already changed)
+            if ($orderr1->getUser() === $this) {
+                $orderr1->setUser(null);
             }
         }
 

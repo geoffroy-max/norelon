@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use App\Entity\Product;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
@@ -28,13 +29,15 @@ class ProductCrudController extends AbstractCrudController
            TextField::new('name'),
            TextField::new('illustration')->hideOnIndex(),
            TextField::new('subtitle'),
+           BooleanField::new('isBest'),
            TextareaField::new('description'),
            MoneyField::new('price')->setCurrency('EUR'),
            AssociationField::new('category'),
            SlugField::new('slug')->setTargetFieldName('name'),
            TextField::new('imageFile')->setFormType(VichImageType::class)->onlyWhenCreating(),
-           ImageField::new('file')->setBasePath('/product/images')->onlyOnIndex(),
-           AssociationField::new('category')
+           ImageField::new('file')->setBasePath('/product/images')->onlyOnIndex()
+
+
 
 
 

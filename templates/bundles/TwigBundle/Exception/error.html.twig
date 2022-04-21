@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Page introuvable!{% endblock %}
+
+{% block body %}
+    <div class="block-sm">
+         <h2>Page introuvable</h2>
+        <p>Desole, cette page ne semble pas etre accessible pour le moment</p>
+        <a href="{{ path('home') }} "  class="btn btn-info">Retour à l'accueil</a>
+    </div>
+{% endblock %}
+{#  je px isoler chaque type d'erreur dans un fichier particulier en gardant le prefix erreur pour avoir
+ plusieurs type d'erreur :error 404, 505 ...
+dans mon cas j'ai utilisé un seul fichier qui centralise toutes les erreurs#}

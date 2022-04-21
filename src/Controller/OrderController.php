@@ -105,6 +105,8 @@ class OrderController extends AbstractController
                 $orderDetails->setPrice($product['produit']->getPrice());
                 $orderDetails->setTotal($product['produit']->getPrice() * $product['quantite']);
                 $this->entityManager->persist($orderDetails);
+
+                //dd($order);
             }
 
             $this->entityManager->flush();

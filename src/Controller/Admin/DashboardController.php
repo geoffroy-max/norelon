@@ -4,7 +4,10 @@ namespace App\Controller\Admin;
 
 use App\Entity\Carrier;
 use App\Entity\Category;
+use App\Entity\Commentaire;
+use App\Entity\Header;
 use App\Entity\Order;
+use App\Entity\Order3;
 use App\Entity\Product;
 use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
@@ -36,6 +39,9 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Category', 'fas fa-list', Category::class);
         yield MenuItem::linkToCrud('Product', 'fas fa-tag', Product::class);
         yield MenuItem::linkToCrud('Carrier', 'fas fa-truck', Carrier::class);
-        yield MenuItem::linkToCrud('Order', 'fas fa-shopping-cart', Order::class);
+        //yield MenuItem::linkToCrud('Order', 'fas fa-shopping-cart', Order::class);
+        yield MenuItem::linkToCrud('Order3', 'fas fa-shopping-cart', Order3::class);
+        yield MenuItem::linkToCrud('Header', 'fas fa-desktop', Header::class);
+        yield MenuItem::linkToCrud('Commentaire', 'fas fa-comments', Commentaire::class);
     }
 }

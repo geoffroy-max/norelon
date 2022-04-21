@@ -43,7 +43,7 @@ class AccountAdrressController extends AbstractController
             //  sinon vers accoun adrs
 
             if($session->get('panier')){
-                return $this->redirectToRoute('order');
+                return $this->redirectToRoute('order1');
             }
           return $this->redirectToRoute('account_adrress');
 
