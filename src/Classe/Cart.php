@@ -31,7 +31,7 @@ class Cart
         $datapanier = [];
         $total = 0;
         foreach ($cart as $id => $quantite) {
-            $product = $this->repository->find($id);
+            $product= $this->repository->find($id);
             $datapanier[] = [
                 'produit' => $product,
                 'quantite' => $quantite

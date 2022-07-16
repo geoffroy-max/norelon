@@ -3,10 +3,12 @@
 namespace App\Form;
 
 use App\Entity\Address;
+use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CountryType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TelType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -25,8 +27,8 @@ class AdressType extends AbstractType
             ->add('company',TextType::class,['label'=>"le nom de votre societé",
             'required'=>false,
         'attr'=>['placeholder'=>"optionnel"]])
-            ->add('address',TextType::class,['label'=>"quel nom souhaitez donner à votre adresse",
-                'attr'=>['placeholder'=>"nommez votre adresse"]])
+            ->add('address',CKEditorType::class,['label'=>"quel nom souhaitez donner à votre adresse",
+                'attr'=>['placeholder'=>"nommez votre adresse"]])  // Ce champ sera remplacé par un éditeur WYSIWYG
             ->add('postal',TextType::class,['label'=>"votre code postale",
         'attr'=>['placeholder'=>"entrez votre code postale"]])
             ->add('city',TextType::class,['label'=>"votre ville",
