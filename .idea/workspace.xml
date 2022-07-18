@@ -7,7 +7,6 @@
     <list default="true" id="a9bdcfcc-a5fe-496e-814c-7ebad27b2ad2" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Procfile" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -209,7 +208,7 @@
       <workItem from="1655807215837" duration="1448000" />
       <workItem from="1657927173307" duration="5729000" />
       <workItem from="1658043609991" duration="6068000" />
-      <workItem from="1658148687725" duration="3093000" />
+      <workItem from="1658148687725" duration="4162000" />
     </task>
     <servers />
   </component>
